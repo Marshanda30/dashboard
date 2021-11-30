@@ -8,7 +8,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 
-axios.defaults.baseURL = 'http://localhost:8000/api'
+axios.defaults.baseURL = 'https://apibts.herokuapp.com/api/sensor'
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 

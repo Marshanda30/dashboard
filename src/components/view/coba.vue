@@ -86,7 +86,7 @@
                                 <td>{{ user.arus_dc3 }}</td>
                                 <td>{{ user.tegangan_dc4 }}</td>
                                 <td>{{ user.arus_dc4 }}</td>
-                                <td>{{ user.time}}</td>
+                                <td>{{ user.createdAt}}</td>
                                 <td class="text-center">
                                   <router-link :to="{ name: 'Edit', params: { id: user.id_sensor } }"
                                   class="btn btn-info btn-sm selected">Edit</router-link>
@@ -195,6 +195,8 @@
     <foot-bar></foot-bar>
   </div>
 </template>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
@@ -207,11 +209,12 @@ export default {
     NavBar,
     SideBar,
     FootBar
-  },
-  data() {
-    return {
-      users: []
-    }
+    },
+}
+new Vue ({
+  el: "#app",
+  data: {
+    users: []
   },
   methods: {
     getUser() {
@@ -225,5 +228,5 @@ export default {
   mounted() {
     this.getUser();
   }
-}
+})
 </script>

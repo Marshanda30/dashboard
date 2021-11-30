@@ -8,8 +8,8 @@
         data() {
             return {
                 chartData: {
-                    labels: ["Babol", "Cabanatuan", "Daegu", "Jerusalem", "Fairfield", "New York", "Gangtok",
-                        "Buenos Aires", "Hafar Al-Batin", "Idlib"
+                    labels: ["Rusia", "Turki", "Daegu", "Hongkong", "Roma", "New York", "Labuan Bajo",
+                        "Perancis", "Argentina", "Inggris"
                     ],
                     datasets: [{
                         label: 'Line Chart',
