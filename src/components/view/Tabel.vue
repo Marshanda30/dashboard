@@ -74,22 +74,40 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr v-for="(user, index) in users" :key="user.id_sensor">
+                              <tr v-for="(item, index) in items" :key="item.id_sensor">
                                 <td>{{ index + 1}}</td>
-                                <td>{{ user.tegangan_ac }}</td>
-                                <td>{{ user.arus_ac }}</td>
-                                <td>{{ user.tegangan_dc1 }}</td>
-                                <td>{{ user.arus_dc1 }}</td>
-                                <td>{{ user.tegangan_dc2 }}</td>
-                                <td>{{ user.arus_dc2 }}</td>
-                                <td>{{ user.tegangan_dc3 }}</td>
-                                <td>{{ user.arus_dc3 }}</td>
-                                <td>{{ user.tegangan_dc4 }}</td>
-                                <td>{{ user.arus_dc4 }}</td>
-                                <td>{{ user.time}}</td>
+                                <td>{{ item.tegangan_ac }}</td>
+                                <td>{{ item.arus_ac }}</td>
+                                <td>{{ item.tegangan_dc1 }}</td>
+                                <td>{{ item.arus_dc1 }}</td>
+                                <td>{{ item.tegangan_dc2 }}</td>
+                                <td>{{ item.arus_dc2 }}</td>
+                                <td>{{ item.tegangan_dc3 }}</td>
+                                <td>{{ item.arus_dc3 }}</td>
+                                <td>{{ item.tegangan_dc4 }}</td>
+                                <td>{{ item.arus_dc4 }}</td>
+                                <td>{{ item.time}}</td>
                                 <td class="text-center">
-                                  <router-link :to="{ name: 'Edit', params: { id: user.id_sensor } }"
+                                  <router-link :to="{ name: 'Edit', params: { id: item.id_sensor } }"
                                   class="btn btn-info btn-sm selected">Edit</router-link>
+                                  <button @click.prevent="PostDelete(post.id)" class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>1</td>
+                                <td>210 V</td>
+                                <td>11 A</td>
+                                <td>12,48 V</td>
+                                <td>0.06 A</td>
+                                <td>12,50 V</td>
+                                <td>0.08 A</td>
+                                <td>12,27 V</td>
+                                <td>0.08 A</td>
+                                <td>12,27 V</td>
+                                <td>0.08 A</td>
+                                <td>14.10</td>
+                                <td class="text-center">
+                                  <router-link :to="{}" class="btn btn-info btn-sm selected">Edit</router-link>
                                   <button @click.prevent="PostDelete(post.id)" class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                               </tr>
@@ -195,7 +213,6 @@
     <foot-bar></foot-bar>
   </div>
 </template>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 <script>
 import NavBar from '../layout/Navbar.vue'
@@ -207,23 +224,6 @@ export default {
     NavBar,
     SideBar,
     FootBar
-  },
-  data() {
-    return {
-      users: []
-    }
-  },
-  methods: {
-    getUser() {
-      axios
-      .get("https://apibts.herokuapp.com/api/sensor")
-      .then(res=> {
-        this.users = res.data.data;
-      })
-    }
-  },
-  mounted() {
-    this.getUser();
-  }
+    },
 }
 </script>
