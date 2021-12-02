@@ -41,7 +41,7 @@
                         type="text"
                         name="table_search"
                         class="form-control float-right"
-                        placeholder="Search"
+                        placeholder="Cari Shelter"
                       />
 
                       <div class="input-group-append">
@@ -81,33 +81,15 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <!-- <tr v-for="(product, index) in products" :key="product.id_sensor">
-                                        <td>{{ index + 1 }}</td>
-                                        <td>{{ product.name }}</td>
-                                        <td>{{ product.lokasi }}</td>
-                                        <td>{{ product.koordinat }}</td>
-                                        <td class="text-center">
-                                            <router-link :to="{}" class="btn btn-info btn-sm">Edit</router-link>
-                                            <button @click.prevent="PostDelete(post.id)" class="btn btn-sm btn-danger">Delete</button>
-                                        </td>
-                                    </tr> -->
-                      <tr>
-                        <td>1</td>
-                        <td>Shelter A</td>
-                        <td>Semarang</td>
-                        <td>66 derajat</td>
+                      <tr v-for="(user, index) in users" :key="user.id">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ user.nama_shelter }}</td>
+                        <td>{{ user.lokasi }}</td>
+                        <td>{{ user.koordinat }}</td>
                         <td class="text-center">
-                          <router-link
-                            :to="{}"
-                            class="btn btn-info btn-sm selected"
-                            >Edit</router-link
-                          >
-                          <button
-                            @click.prevent="PostDelete(post.id)"
-                            class="btn btn-sm btn-danger"
-                          >
-                            Delete
-                          </button>
+                         <router-link :to="{ name: 'Edit', params: { id: user.id } }"
+                                  class="btn btn-info btn-sm selected">Edit</router-link>
+                          <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                       </tr>
                     </tbody>
@@ -148,13 +130,13 @@
               <div class="modal-body">
                 <div class="form-group">
                   <label for="">Nama Shelter (BTS)</label>
-                  <input type="text" class="form-control" /> <br />
+                  <input v-model="form.nama_shelter" type="text" class="form-control" /> <br />
 
                   <label for="">Regional (wilayah)</label>
-                  <input type="text" class="form-control" /> <br />
+                  <input v-model="form.lokasi" type="text" class="form-control" /> <br />
 
                   <label for="">Koordinat</label>
-                  <input type="text" class="form-control" /> <br />
+                  <input v-model="form.koordinat" type="text" class="form-control" /> <br />
                 </div>
               </div>
               <div class="modal-footer">
@@ -165,7 +147,7 @@
                 >
                   Close
                 </button>
-                <button type="submit" class="btn btn-primary">Save k</button>
+                <button @click="saveProduct" type="submit" class="btn btn-primary">Save</button>
               </div>
             </form>
           </div>
@@ -182,12 +164,84 @@ import NavBar from "../layout/Navbar.vue";
 import SideBar from "../layout/Sidebar.vue";
 import FootBar from "../layout/Footbar.vue";
 
+import axios from "axios";
+import Swal from 'sweetalert2';
+
 export default {
   components: {
     NavBar,
     SideBar,
     FootBar,
   },
+  data() {
+    return {
+      form: {
+        nama_shelter: "",
+        lokasi: "",
+        koordinat: ""
+      },
+      users: [],
+    };
+  },
+  // https://btsapii.herokuapp.com/api/shelter
+  mounted() {
+    this.getUsers()
+  },
+  methods: {
+    getUsers() {
+      axios
+      .get("https://btss.herokuapp.com/api/shelter")
+      .then((res) => {
+        this.users = res.data.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    },
+    saveProduct() {
+      axios
+      .post("https://btss.herokuapp.com/api/shelter/create", this.form)
+      .then(res => {
+        console.log(res)
+        this.$router.push({
+          name: "Shelter"
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    deleteData(id) {
+        Swal.fire({
+          title: "Anda Yakin Ingin Menghapus Shelter Ini ?",
+          text: "Klik Batal untuk Membatalkan Penghapusan",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "Batal",
+          confirmButtonText: "Hapus"
+        }).then(result => {
+          if (result.value) {
+            axios.delete('https://btss.herokuapp.com/api/shelter/delete/' + id)
+              .then(res => {
+                Swal.fire(
+                  "Terhapus","Shelter Anda Sudah Terhapus","success");
+                this.getUsers();
+                console.log(res);
+              })
+              .catch((err) => {
+                Swal.fire(
+                  "Gagal","Shelter Anda Gagal Dihapus","warning");
+                console.log(err)
+              })
+          } else {
+            Swal.fire(
+              "Gagal","Shelter Anda Gagal Dihapus","warning");
+          }
+        })
+      }
+  }
 };
 </script>
 
