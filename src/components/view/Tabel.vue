@@ -88,8 +88,7 @@
                                 <td>{{ user.arus_dc4 }}</td>
                                 <td>{{ new Date(user.created_at).toLocaleString("en-UK", {timeZone: "Europe/London"})}}</td>
                                 <td class="text-center">
-                                  <router-link :to="{ name: 'Edit', params: { id: user.id } }"
-                                  class="btn btn-info btn-sm selected">Edit</router-link>
+                                  <button class="btn btn-info btn-sm selected">Edit</button>
                                   <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                               </tr>

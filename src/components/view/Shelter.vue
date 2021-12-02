@@ -37,11 +37,7 @@
                       class="input-group input-group-sm"
                       style="width: 150px;"
                     >
-                      <input
-                        type="text"
-                        name="table_search"
-                        class="form-control float-right"
-                        placeholder="Cari Shelter"
+                      <input type="text" name="table_search" class="form-control float-right" placeholder="Cari Shelter"
                       />
 
                       <div class="input-group-append">
@@ -87,8 +83,7 @@
                         <td>{{ user.lokasi }}</td>
                         <td>{{ user.koordinat }}</td>
                         <td class="text-center">
-                         <router-link :to="{ name: 'Edit', params: { id: user.id } }"
-                                  class="btn btn-info btn-sm selected">Edit</router-link>
+                          <button class="btn btn-info btn-sm selected">Edit</button>
                           <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                       </tr>
