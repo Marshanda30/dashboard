@@ -86,7 +86,7 @@
                                 <td>{{ user.arus_dc3 }}</td>
                                 <td>{{ user.tegangan_dc4 }}</td>
                                 <td>{{ user.arus_dc4 }}</td>
-                                <td>{{ new Date(user.created_at).toLocaleString("en-UK", {timeZone: "Europe/London"})}}</td>
+                                <td>{{ new Date(user.createdAt).toLocaleString()}}</td>
                                 <td class="text-center">
                                   <button class="btn btn-info btn-sm selected">Edit</button>
                                   <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
@@ -210,7 +210,7 @@ export default {
   methods: {
     getUsers() {
       axios
-      .get("https://btss.herokuapp.com/api/sensor")
+      .get("https://btsapii.herokuapp.com/api/sensor")
       .then((res) => {
         this.users = res.data.data;
       })
@@ -220,7 +220,7 @@ export default {
     },
     saveProduct() {
       axios
-      .post("https://btss.herokuapp.com/api/sensor/create", this.form)
+      .post("https://btsapii.herokuapp.com/api/sensor/create", this.form)
       .then(res => {
         console.log(res)
         this.$router.push({
@@ -243,7 +243,7 @@ export default {
           confirmButtonText: "Hapus"
         }).then(result => {
           if (result.value) {
-            axios.delete('https://btss.herokuapp.com/api/sensor/delete/' + id)
+            axios.delete('https://btsapii.herokuapp.com/api/sensor/delete/' + id)
               .then(res => {
                 Swal.fire(
                   "Terhapus","Data Anda Sudah Terhapus","success");

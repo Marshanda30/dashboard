@@ -73,6 +73,7 @@
                         <th>Nama Shelter (BTS)</th>
                         <th>Regional (wilayah)</th>
                         <th>Koordinat</th>
+                        <th>Date</th>
                         <th class="text-center">Actions</th>
                       </tr>
                     </thead>
@@ -82,6 +83,7 @@
                         <td>{{ user.nama_shelter }}</td>
                         <td>{{ user.lokasi }}</td>
                         <td>{{ user.koordinat }}</td>
+                        <td>{{ user.createdAt }}</td>
                         <td class="text-center">
                           <button class="btn btn-info btn-sm selected">Edit</button>
                           <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
@@ -185,7 +187,7 @@ export default {
   methods: {
     getUsers() {
       axios
-      .get("https://btss.herokuapp.com/api/shelter")
+      .get("https://btsapii.herokuapp.com/api/shelter")
       .then((res) => {
         this.users = res.data.data;
       })
@@ -195,7 +197,7 @@ export default {
     },
     saveProduct() {
       axios
-      .post("https://btss.herokuapp.com/api/shelter/create", this.form)
+      .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
       .then(res => {
         console.log(res)
         this.$router.push({
@@ -218,7 +220,7 @@ export default {
           confirmButtonText: "Hapus"
         }).then(result => {
           if (result.value) {
-            axios.delete('https://btss.herokuapp.com/api/shelter/delete/' + id)
+            axios.delete('https://btsapii.herokuapp.com/api/shelter/delete/' + id)
               .then(res => {
                 Swal.fire(
                   "Terhapus","Shelter Anda Sudah Terhapus","success");
