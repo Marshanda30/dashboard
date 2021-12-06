@@ -83,7 +83,7 @@
                         <td>{{ user.nama_shelter }}</td>
                         <td>{{ user.lokasi }}</td>
                         <td>{{ user.koordinat }}</td>
-                        <td>{{ user.createdAt }}</td>
+                        <td>{{ new Date(user.createdAt).toLocaleString() }}</td>
                         <td class="text-center">
                           <button class="btn btn-info btn-sm selected">Edit</button>
                           <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
@@ -180,7 +180,6 @@ export default {
       users: [],
     };
   },
-  // https://btsapii.herokuapp.com/api/shelter
   mounted() {
     this.getUsers()
   },

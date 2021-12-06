@@ -38,7 +38,7 @@
             <li class="nav-item">
               <router-link to="report" class="nav-link">
                 <i class="fas fa-book-open nav-icon"></i>
-                <p>Report</p>
+                <p>Data</p>
               </router-link>
             </li>
             <li class="nav-item">
