@@ -161,8 +161,22 @@ import NavBar from "../layout/Navbar.vue";
 import SideBar from "../layout/Sidebar.vue";
 import FootBar from "../layout/Footbar.vue";
 
+import Vue from 'vue'
 import axios from "axios";
-import Swal from 'sweetalert2';
+
+let Fire = new Vue();
+window.Fire = Fire;
+
+//import alert
+import Swal from 'sweetalert2'
+window.Swal = Swal;
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000
+});
+window.Toast = Toast;
 
 export default {
   components: {
@@ -198,6 +212,11 @@ export default {
       axios
       .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
       .then(res => {
+        Fire.$emit("refreshData");
+        Toast.fire({
+          icon: 'success',
+          title: 'Data Berhasil Ditambahkan'
+        });
         console.log(res)
         this.$router.push({
           name: "Shelter"
