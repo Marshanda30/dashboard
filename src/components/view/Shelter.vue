@@ -55,14 +55,14 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <button
-                    type="submit"
-                    class="btn btn-success float-right"
-                    data-toggle="modal"
-                    data-target="#exampleModal"
-                  >
-                    Add New
-                  </button>
+                  <router-link to="addShelter">
+                    <button
+                      type="submit"
+                      class="btn btn-success float-right"
+                      >
+                      Add New
+                    </button>
+                  </router-link>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -85,7 +85,9 @@
                         <td>{{ user.koordinat }}</td>
                         <td>{{ new Date(user.createdAt).toLocaleString() }}</td>
                         <td class="text-center">
-                          <button class="btn btn-info btn-sm selected">Edit</button>
+                          <router-link :to="{ name: 'editshelter',  params: {id: user.id}}">
+                            <button class="btn btn-info btn-sm selected">Edit</button>
+                          </router-link>
                           <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                       </tr>

@@ -24,25 +24,25 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="shelter" class="nav-link">
+              <router-link to="/shelter" class="nav-link">
                 <i class="fas fa-map-marker-alt nav-icon"></i>
                 <p>Shelter</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="tabel" class="nav-link">
+              <router-link to="/tabel" class="nav-link">
                 <i class="fas fa-laptop nav-icon"></i>
                 <p>Realtime</p>
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="report" class="nav-link">
+              <router-link to="/report" class="nav-link">
                 <i class="fas fa-book-open nav-icon"></i>
                 <p>Data</p>
               </router-link>
             </li>
             <li class="nav-item">
-                <router-link to="login" class="nav-link">
+                <router-link to="/login" class="nav-link">
                   <i class="fas fa-sign-out-alt nav-icon"></i>
                   <p>Log Out</p>
                 </router-link>
