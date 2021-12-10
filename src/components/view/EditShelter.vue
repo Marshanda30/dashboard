@@ -84,14 +84,14 @@ export default {
       update(){
           axios.put("https://btsapii.herokuapp.com/api/shelter/update/" + this.shelter_id, this.form)
           .then((res)=>{
-              Swal.fire("Berhasil","Shelter Anda Sudah Terupdate","success");
+              Swal.fire("Berhasil","Data Shelter Anda Sudah Terupdate","success");
               this.$router.push({
                   name:"Shelter"
               })
               console.log(res)
           })
           .catch((err)=> {
-              Swal.fire("Gagal", "Shelter Gagal Terupdate", "warning");
+              Swal.fire("Gagal", "Data Shelter Gagal Terupdate", "warning");
               console.log(err)
           })
       }

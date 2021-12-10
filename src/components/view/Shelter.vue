@@ -68,13 +68,13 @@
                 <div class="card-body">
                   <table class="table table-bordered table-striped">
                     <thead>
-                      <tr>
+                      <tr class="text-center">
                         <th>No</th>
                         <th>Nama Shelter (BTS)</th>
                         <th>Regional (wilayah)</th>
                         <th>Koordinat</th>
                         <th>Date</th>
-                        <th class="text-center">Actions</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -83,7 +83,7 @@
                         <td>{{ user.nama_shelter }}</td>
                         <td>{{ user.lokasi }}</td>
                         <td>{{ user.koordinat }}</td>
-                        <td>{{ new Date(user.createdAt).toLocaleString() }}</td>
+                        <td>{{ new Date(user.updatedAt).toLocaleString() }}</td>
                         <td class="text-center">
                           <router-link :to="{ name: 'editshelter',  params: {id: user.id}}">
                             <button class="btn btn-info btn-sm selected">Edit</button>
@@ -101,57 +101,6 @@
           <!-- /.card -->
         </div>
       </div>
-      <!-- modal create data shelter -->
-      <div
-        class="modal fade"
-        id="exampleModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Add New Data Shelter
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="">Nama Shelter (BTS)</label>
-                  <input v-model="form.nama_shelter" type="text" class="form-control" /> <br />
-
-                  <label for="">Regional (wilayah)</label>
-                  <input v-model="form.lokasi" type="text" class="form-control" /> <br />
-
-                  <label for="">Koordinat</label>
-                  <input v-model="form.koordinat" type="text" class="form-control" /> <br />
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button @click="saveProduct" type="submit" class="btn btn-primary">Save</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
       <!-- /.row -->
     </div>
     <foot-bar></foot-bar>
@@ -163,22 +112,8 @@ import NavBar from "../layout/Navbar.vue";
 import SideBar from "../layout/Sidebar.vue";
 import FootBar from "../layout/Footbar.vue";
 
-import Vue from 'vue'
 import axios from "axios";
-
-let Fire = new Vue();
-window.Fire = Fire;
-
-//import alert
 import Swal from 'sweetalert2'
-window.Swal = Swal;
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 3000
-});
-window.Toast = Toast;
 
 export default {
   components: {
@@ -214,11 +149,6 @@ export default {
       axios
       .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
       .then(res => {
-        Fire.$emit("refreshData");
-        Toast.fire({
-          icon: 'success',
-          title: 'Data Berhasil Ditambahkan'
-        });
         console.log(res)
         this.$router.push({
           name: "Shelter"

@@ -46,18 +46,17 @@
                           </div>
                         </div>
                         <div class="col-12">
-                          <button
-                          type="submit"
-                          class="btn btn-success float-right"
-                          data-toggle="modal" data-target="#exampleModal">
-                          Add New
-                          </button>
+                          <router-link to="addsensor">
+                            <button type="submit" class="btn btn-success float-right">
+                              Add New
+                            </button>
+                          </router-link>
                         </div>
                         <!-- card body -->
                         <div class="card-body">
                           <table class="table table-bordered table-striped">
                             <thead>
-                              <tr>
+                              <tr class="text-center">
                                 <th>No</th>
                                 <th>TegAC</th>
                                 <th>ArusAC</th>
@@ -70,7 +69,7 @@
                                 <th>TegDC4</th>
                                 <th>ArusDC4</th>
                                 <th>Date</th>
-                                <th class="text-center">Actions</th>
+                                <th>Actions</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -86,9 +85,11 @@
                                 <td>{{ user.arus_dc3 }}</td>
                                 <td>{{ user.tegangan_dc4 }}</td>
                                 <td>{{ user.arus_dc4 }}</td>
-                                <td>{{ new Date(user.createdAt).toLocaleString()}}</td>
+                                <td>{{ new Date(user.updatedAt).toLocaleString()}}</td>
                                 <td class="text-center">
-                                  <button class="btn btn-info btn-sm selected">Edit</button>
+                                  <router-link :to="{ name: 'editsensor',  params: {id: user.id}}">
+                                    <button class="btn btn-info btn-sm selected">Edit</button>
+                                  </router-link>
                                   <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                               </tr>
@@ -104,68 +105,6 @@
         </div>
     </div>
         <!-- /.container-fluid -->
-                <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">
-                Add New Data Sensor
-              </h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form>
-              <div class="modal-body">
-                <div class="form-group">
-                  <label for="">Tegangan AC</label>
-                  <input v-model="form.tegangan_ac" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Arus AC</label>
-                  <input v-model="form.arus_ac" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Tegangan DC 1</label>
-                  <input v-model="form.tegangan_dc1" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Arus DC 1</label>
-                  <input v-model="form.arus_dc1" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Tegangan DC 2</label>
-                  <input v-model="form.tegangan_dc2" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Arus DC 2</label>
-                  <input v-model="form.arus_dc2" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Tegangan DC 3</label>
-                  <input v-model="form.tegangan_dc3" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Arus DC 3</label>
-                  <input v-model="form.arus_dc3" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Tegangan DC 4</label>
-                  <input v-model="form.tegangan_dc4" type="text" class="form-control" required/> <br/>
-
-                  <label for="">Arus DC 4</label>
-                  <input v-model="form.arus_dc4" type="text" class="form-control" required/> <br/>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-dismiss="modal">Close
-                </button>
-                <button @click="saveProduct" type="submit" class="btn btn-primary">Save</button>
-              </div>
-            </form>
-        </div>
-    </div>
-  </div>
       </section>
     </div>
     <foot-bar></foot-bar>
@@ -216,19 +155,6 @@ export default {
       })
       .catch((err) => {
         console.log(err);
-      })
-    },
-    saveProduct() {
-      axios
-      .post("https://btsapii.herokuapp.com/api/sensor/create", this.form)
-      .then(res => {
-        console.log(res)
-        this.$router.push({
-          name: "Tabel"
-        })
-      })
-      .catch(err => {
-        console.log(err)
       })
     },
     deleteData(id) {
