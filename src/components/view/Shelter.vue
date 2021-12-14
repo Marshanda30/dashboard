@@ -123,6 +123,7 @@ export default {
   },
   data() {
     return {
+      errors: null,
       form: {
         nama_shelter: "",
         lokasi: "",

@@ -19,7 +19,7 @@ let routes =[
   { path: '/editshelter/:id', name: 'editshelter' , component:require('./components/view/EditShelter.vue').default },
   { path: '/tabel', name: 'Tabel', component:require('./components/view/Tabel.vue').default },
   { path: '/addsensor', name: 'addsensor', component:require('./components/view/AddSensor.vue').default },
-  { path: '/editsensor', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
+  { path: '/editsensor/:id', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
   { path: '/report', component:require('./components/view/Report.vue').default },
   { path: '/login', name: 'login', component:require('./components/view/Login.vue').default },
   { path: '/register', name: 'register',  component:require('./components/view/Register.vue').default }
