@@ -59,7 +59,7 @@
           <!-- /.col -->
         </div>
       </form>
-      <router-link to="login" class="text-center">I already have a membership</router-link>
+      <router-link :to="{name: 'login'}" class="text-center">I already have a membership</router-link>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->
