@@ -13,7 +13,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 
 let routes =[
-  { path: '/', component:require('./components/view/Home.vue').default },
+  { path: '/', name: 'login', component:require('./components/view/Login.vue').default },
   { path: '/shelter',name:'Shelter', component:require('./components/view/Shelter.vue').default },
   { path: '/addShelter', name: 'addShelter' , component:require('./components/view/AddShelter.vue').default },
   { path: '/editshelter/:id', name: 'editshelter' , component:require('./components/view/EditShelter.vue').default },
@@ -21,7 +21,7 @@ let routes =[
   { path: '/addsensor', name: 'addsensor', component:require('./components/view/AddSensor.vue').default },
   { path: '/editsensor/:id', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
   { path: '/report', component:require('./components/view/Report.vue').default },
-  { path: '/login', name: 'login', component:require('./components/view/Login.vue').default },
+  { path: '/home', name: 'home', component:require('./components/view/Home.vue').default },
   { path: '/register', name: 'register',  component:require('./components/view/Register.vue').default }
 ]
 

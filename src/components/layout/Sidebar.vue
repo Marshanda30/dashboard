@@ -18,7 +18,7 @@
           <li class="nav-item menu-open">
           <ul class="nav nav-treeview" >
             <li class="nav-item">
-              <router-link to="/" class="nav-link">
+              <router-link to="/home" class="nav-link">
                 <i class="fas fa-tachometer-alt nav-icon"></i>
                 <p>Dashboard</p>
               </router-link>
@@ -36,13 +36,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/report" class="nav-link">
-                <i class="fas fa-book-open nav-icon"></i>
-                <p>Data</p>
-              </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/login" class="nav-link">
+                <router-link to="/" class="nav-link">
                   <i class="fas fa-sign-out-alt nav-icon"></i>
                   <p>Log Out</p>
                 </router-link>
