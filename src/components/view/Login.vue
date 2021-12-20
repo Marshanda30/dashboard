@@ -44,7 +44,7 @@
             </div>
           </form>
           <p class="mb-0 mt-3">
-            <router-link to="register" class="text-center">Register </router-link>
+            <router-link :to="{name:'register'}" class="text-center">Register </router-link>
           </p>
         </div>
         <!-- /.login-card-body -->

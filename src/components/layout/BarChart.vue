@@ -8,7 +8,7 @@
     data() {
       return {
         chartData: {
-          labels: ["2021-12-10 1.50 PM", "2021-12-10 8.54 AM", "2021-12-10 8.59 AM", "2021-12-16 10.31 AM"],
+          labels: ["2021-12-10 1.50 PM", "2021-12-10 8.54 AM", "2021-12-16 3.22 PM", "2021-12-16 10.31 AM"],
           datasets: [{
               label: 'Tegangan',
               borderWidth: 1,

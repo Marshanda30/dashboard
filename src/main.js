@@ -14,15 +14,15 @@ Vue.use(VueRouter)
 
 let routes =[
   { path: '/', name: 'login', component:require('./components/view/Login.vue').default },
+  { path: '/register', name: 'register',  component:require('./components/view/Register.vue').default },
+  { path: '/home', name: 'home', component:require('./components/view/Home.vue').default },
   { path: '/shelter',name:'Shelter', component:require('./components/view/Shelter.vue').default },
   { path: '/addShelter', name: 'addShelter' , component:require('./components/view/AddShelter.vue').default },
   { path: '/editshelter/:id', name: 'editshelter' , component:require('./components/view/EditShelter.vue').default },
   { path: '/tabel', name: 'Tabel', component:require('./components/view/Tabel.vue').default },
   { path: '/addsensor', name: 'addsensor', component:require('./components/view/AddSensor.vue').default },
   { path: '/editsensor/:id', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
-  { path: '/report', component:require('./components/view/Report.vue').default },
-  { path: '/home', name: 'home', component:require('./components/view/Home.vue').default },
-  { path: '/register', name: 'register',  component:require('./components/view/Register.vue').default }
+  { path: '/report', component:require('./components/view/Report.vue').default }
 ]
 
 const router = new VueRouter({
