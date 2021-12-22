@@ -22,7 +22,7 @@ let routes =[
   { path: '/tabel', name: 'Tabel', component:require('./components/view/Tabel.vue').default },
   { path: '/addsensor', name: 'addsensor', component:require('./components/view/AddSensor.vue').default },
   { path: '/editsensor/:id', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
-  { path: '/report', component:require('./components/view/Report.vue').default }
+  { path: '/sensor', name: 'sensor', component:require('./components/view/Sensor.vue').default }
 ]
 
 const router = new VueRouter({

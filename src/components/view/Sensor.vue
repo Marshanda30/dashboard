@@ -13,7 +13,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/#/home">Home</a></li>
-                <li class="breadcrumb-item active">Realtime</li>
+                <li class="breadcrumb-item active">Sensor</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -42,7 +42,7 @@
                         </div> <br/>
                         <div class="col-12">  
                           <div class="alert alert-info" role="alert">
-                            <b>Info:</b> Menampilkan data sensor secara live realtime
+                            <b>Info:</b> Menampilkan seluruh data sensor pada sistem
                           </div>
                         </div>
                         <div class="col-12">
@@ -151,7 +151,7 @@ export default {
   methods: {
     getUsers() {
       axios
-      .get("https://btsapii.herokuapp.com/api/sensor/realtime")
+      .get("https://btsapii.herokuapp.com/api/sensor")
       .then((res) => {
         this.users = res.data.data;
       })

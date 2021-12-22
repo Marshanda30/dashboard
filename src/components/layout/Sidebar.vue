@@ -36,6 +36,12 @@
               </router-link>
             </li>
             <li class="nav-item">
+              <router-link to="/sensor" class="nav-link">
+                <i class="fas fa-database nav-icon"></i>
+                <p>Data</p>
+              </router-link>
+            </li>
+            <li class="nav-item">
                 <router-link to="/" class="nav-link">
                   <i class="fas fa-sign-out-alt nav-icon"></i>
                   <p>Log Out</p>
