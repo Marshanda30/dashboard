@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h2 class="card-title">Data Sensor</h2>
+                            <h2 class="card-title">Data Live Realtime</h2>
 
                             <div class="card-tools">
                               <div class="input-group input-group-sm" style="width: 150px;">
@@ -44,13 +44,6 @@
                           <div class="alert alert-info" role="alert">
                             <b>Info:</b> Menampilkan data sensor secara live realtime
                           </div>
-                        </div>
-                        <div class="col-12">
-                          <router-link to="addsensor">
-                            <button type="submit" class="btn btn-success float-right">
-                              Add New
-                            </button>
-                          </router-link>
                         </div>
                         <!-- card body -->
                         <div class="card-body">
@@ -87,9 +80,6 @@
                                 <td>{{ user.arus_dc4 }}</td>
                                 <td>{{ new Date(user.updatedAt).toLocaleString()}}</td>
                                 <td class="text-center">
-                                  <router-link :to="{ name: 'editsensor',  params: {id: user.id}}">
-                                    <button class="btn btn-info btn-sm selected">Edit</button>
-                                  </router-link>
                                   <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                                 </td>
                               </tr>

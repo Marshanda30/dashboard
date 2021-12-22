@@ -19,7 +19,7 @@ let routes =[
   { path: '/shelter',name:'Shelter', component:require('./components/view/Shelter.vue').default },
   { path: '/addShelter', name: 'addShelter' , component:require('./components/view/AddShelter.vue').default },
   { path: '/editshelter/:id', name: 'editshelter' , component:require('./components/view/EditShelter.vue').default },
-  { path: '/tabel', name: 'Tabel', component:require('./components/view/Tabel.vue').default },
+  { path: '/realtime', name: 'realtime', component:require('./components/view/Realtime.vue').default },
   { path: '/addsensor', name: 'addsensor', component:require('./components/view/AddSensor.vue').default },
   { path: '/editsensor/:id', name: 'editsensor', component:require('./components/view/EditSensor.vue').default },
   { path: '/sensor', name: 'sensor', component:require('./components/view/Sensor.vue').default }

@@ -30,7 +30,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/tabel" class="nav-link">
+              <router-link to="/realtime" class="nav-link">
                 <i class="fas fa-laptop nav-icon"></i>
                 <p>Realtime</p>
               </router-link>
