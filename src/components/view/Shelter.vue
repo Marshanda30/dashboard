@@ -33,12 +33,8 @@
                   <h2 class="card-title">Kelola Shelter(BTS)</h2>
 
                   <div class="card-tools">
-                    <div
-                      class="input-group input-group-sm"
-                      style="width: 150px;"
-                    >
-                      <input type="text" name="table_search" class="form-control float-right" placeholder="Cari Shelter"
-                      />
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                      <input type="text" v-model="search" class="form-control float-right" placeholder="Cari Shelter" />
 
                       <div class="input-group-append">
                         <button type="submit" class="btn btn-default">
@@ -56,10 +52,7 @@
                 </div>
                 <div class="col-12">
                   <router-link to="addShelter">
-                    <button
-                      type="submit"
-                      class="btn btn-success float-right"
-                      >
+                    <button type="submit" class="btn btn-success float-right">
                       Add New
                     </button>
                   </router-link>
@@ -108,58 +101,59 @@
 </template>
 
 <script>
-import NavBar from "../layout/Navbar.vue";
-import SideBar from "../layout/Sidebar.vue";
-import FootBar from "../layout/Footbar.vue";
+  import NavBar from "../layout/Navbar.vue";
+  import SideBar from "../layout/Sidebar.vue";
+  import FootBar from "../layout/Footbar.vue";
 
-import axios from "axios";
-import Swal from 'sweetalert2'
+  import axios from "axios";
+  import Swal from 'sweetalert2'
 
-export default {
-  components: {
-    NavBar,
-    SideBar,
-    FootBar,
-  },
-  data() {
-    return {
-      errors: null,
-      form: {
-        nama_shelter: "",
-        lokasi: "",
-        koordinat: ""
+  export default {
+    components: {
+      NavBar,
+      SideBar,
+      FootBar,
+    },
+    data() {
+      return {
+        errors: null,
+        form: {
+          nama_shelter: "",
+          lokasi: "",
+          koordinat: ""
+        },
+        users: [],
+        search: ''
+      };
+    },
+    mounted() {
+      this.getUsers()
+    },
+    methods: {
+      getUsers() {
+        axios
+          .get("https://btsapii.herokuapp.com/api/shelter")
+          .then((res) => {
+            this.users = res.data.data;
+          })
+          .catch((err) => {
+            console.log(err);
+          })
       },
-      users: [],
-    };
-  },
-  mounted() {
-    this.getUsers()
-  },
-  methods: {
-    getUsers() {
-      axios
-      .get("https://btsapii.herokuapp.com/api/shelter")
-      .then((res) => {
-        this.users = res.data.data;
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    },
-    saveProduct() {
-      axios
-      .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
-      .then(res => {
-        console.log(res)
-        this.$router.push({
-          name: "Shelter"
-        })
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    },
-    deleteData(id) {
+      saveProduct() {
+        axios
+          .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
+          .then(res => {
+            console.log(res)
+            this.$router.push({
+              name: "Shelter"
+            })
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      },
+      deleteData(id) {
         Swal.fire({
           title: "Anda Yakin Ingin Menghapus Shelter Ini ?",
           text: "Klik Batal untuk Membatalkan Penghapusan",
@@ -174,42 +168,46 @@ export default {
             axios.delete('https://btsapii.herokuapp.com/api/shelter/delete/' + id)
               .then(res => {
                 Swal.fire(
-                  "Terhapus","Shelter Anda Sudah Terhapus","success");
+                  "Terhapus", "Shelter Anda Sudah Terhapus", "success");
                 this.getUsers();
                 console.log(res);
               })
               .catch((err) => {
                 Swal.fire(
-                  "Gagal","Shelter Anda Gagal Dihapus","warning");
+                  "Gagal", "Shelter Anda Gagal Dihapus", "warning");
                 console.log(err)
               })
           } else {
             Swal.fire(
-              "Gagal","Shelter Anda Gagal Dihapus","warning");
+              "Gagal", "Shelter Anda Gagal Dihapus", "warning");
           }
         })
       }
-  }
-};
+    }
+  };
 </script>
 
 <style>
-h2 {
-  font-family: "Bahnschrift SemiBold";
-}
-button {
-  font-family: "Franklin Gothic Medium";
-  margin-right: 15px;
-}
-.btn-info {
-  font-family: "Franklin Gothic Medium";
-}
-.selected {
-  margin-right: 10px;
-}
-.alert-info {
-  font-family: "Times New Roman";
-  margin-left: 15px;
-  margin-right: 15px;
-}
+  h2 {
+    font-family: "Bahnschrift SemiBold";
+  }
+
+  button {
+    font-family: "Franklin Gothic Medium";
+    margin-right: 15px;
+  }
+
+  .btn-info {
+    font-family: "Franklin Gothic Medium";
+  }
+
+  .selected {
+    margin-right: 10px;
+  }
+
+  .alert-info {
+    font-family: "Times New Roman";
+    margin-left: 15px;
+    margin-right: 15px;
+  }
 </style>
