@@ -74,33 +74,33 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(user, index) in users" :key="user.id">
+                        <tr v-for="(item, index) in items" :key="item.id">
                           <td>{{ index + 1}}</td>
-                          <td>{{ user.tegangan_ac }}</td>
-                          <td>{{ user.arus_ac }}</td>
-                          <td>{{ user.tegangan_dc1 }}</td>
-                          <td>{{ user.arus_dc1 }}</td>
-                          <td>{{ user.tegangan_dc2 }}</td>
-                          <td>{{ user.arus_dc2 }}</td>
-                          <td>{{ user.tegangan_dc3 }}</td>
-                          <td>{{ user.arus_dc3 }}</td>
-                          <td>{{ user.tegangan_dc4 }}</td>
-                          <td>{{ user.arus_dc4 }}</td>
-                          <td>{{ new Date(user.updatedAt).toLocaleString()}}</td>
+                          <td>{{ item.tegangan_ac }}</td>
+                          <td>{{ item.arus_ac }}</td>
+                          <td>{{ item.tegangan_dc1 }}</td>
+                          <td>{{ item.arus_dc1 }}</td>
+                          <td>{{ item.tegangan_dc2 }}</td>
+                          <td>{{ item.arus_dc2 }}</td>
+                          <td>{{ item.tegangan_dc3 }}</td>
+                          <td>{{ item.arus_dc3 }}</td>
+                          <td>{{ item.tegangan_dc4 }}</td>
+                          <td>{{ item.arus_dc4 }}</td>
+                          <td>{{ new Date(item.updatedAt).toLocaleString()}}</td>
                           <td class="text-center">
-                            <router-link :to="{ name: 'editsensor',  params: {id: user.id}}">
+                            <router-link :to="{ name: 'editsensor',  params: {id: item.id}}">
                               <button class="btn btn-info btn-sm selected">Edit</button>
                             </router-link>
-                            <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
+                            <button @click="deleteData(item.id)" class="btn btn-sm btn-danger">Delete</button>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                 </div>
+              <!-- /.card-body -->
               </div>
               <!-- /.card-header -->
-              <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
@@ -128,19 +128,7 @@
     },
     data() {
       return {
-        form: {
-          tegangan_ac: "",
-          arus_ac: "",
-          tegangan_dc1: "",
-          arus_dc1: "",
-          tegangan_dc2: "",
-          arus_dc2: "",
-          tegangan_dc3: "",
-          arus_dc3: "",
-          tegangan_dc4: "",
-          arus_dc4: ""
-        },
-        users: [],
+        items: [],
         timer: ''
       };
     },
@@ -154,7 +142,7 @@
         axios
           .get("https://btsapii.herokuapp.com/api/sensor")
           .then((res) => {
-            this.users = res.data.data;
+            this.items = res.data.data;
           })
           .catch((err) => {
             console.log(err);

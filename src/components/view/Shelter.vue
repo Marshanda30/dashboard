@@ -71,17 +71,17 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(user, index) in users" :key="user.id">
+                      <tr v-for="(item, index) in items" :key="item.id">
                         <td>{{ index + 1 }}</td>
-                        <td>{{ user.nama_shelter }}</td>
-                        <td>{{ user.lokasi }}</td>
-                        <td>{{ user.koordinat }}</td>
-                        <td>{{ new Date(user.updatedAt).toLocaleString() }}</td>
+                        <td>{{ item.nama_shelter }}</td>
+                        <td>{{ item.lokasi }}</td>
+                        <td>{{ item.koordinat }}</td>
+                        <td>{{ new Date(item.updatedAt).toLocaleString() }}</td>
                         <td class="text-center">
-                          <router-link :to="{ name: 'editshelter',  params: {id: user.id}}">
+                          <router-link :to="{ name: 'editshelter',  params: {id: item.id}}">
                             <button class="btn btn-info btn-sm selected">Edit</button>
                           </router-link>
-                          <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
+                          <button @click="deleteData(item.id)" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                       </tr>
                     </tbody>
@@ -116,25 +116,21 @@
     },
     data() {
       return {
+        items: [],
         errors: null,
-        form: {
-          nama_shelter: "",
-          lokasi: "",
-          koordinat: ""
-        },
-        users: [],
         search: ''
       };
     },
     mounted() {
-      this.getUsers()
+      this.getUsers();
+      this.timer = setInterval(this.getUsers, 5000);
     },
     methods: {
       getUsers() {
         axios
           .get("https://btsapii.herokuapp.com/api/shelter")
           .then((res) => {
-            this.users = res.data.data;
+            this.items = res.data.data;
           })
           .catch((err) => {
             console.log(err);
