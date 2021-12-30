@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="password" class="form-control" placeholder="Password" v-model='form.password'>
+              <input type="password" class="form-control" placeholder="Password" v-model="form.password">
               <div class="input-group-append">
                 <div class="input-group-text">
                   <span class="fas fa-lock"></span>
@@ -36,9 +36,9 @@
               </div>
               <!-- /.col -->
               <div class="col-4">
-                <router-link :to="{name: 'home'}">
+                <!-- <router-link :to="{name: 'home'}"> -->
                   <button type="submit" class="btn btn-primary btn-block">Login</button>
-                </router-link>
+                <!-- </router-link> -->
               </div>
               <!-- /.col -->
             </div>

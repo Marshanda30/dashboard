@@ -10,7 +10,7 @@ Vue.component('jw-pagination', JwPagination);
 Vue.use(Vuex)
 
 
-axios.defaults.baseURL = 'https://apibts.herokuapp.com/api/sensor'
+axios.defaults.baseURL = 'https://btsapii.herokuapp.com/api/'
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 

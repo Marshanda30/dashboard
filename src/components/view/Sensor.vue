@@ -55,7 +55,7 @@
                   </div>
                   <!-- card body -->
                   <div class="card-body">
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped" id="sensor">
                       <thead>
                         <tr class="text-center">
                           <th>No</th>
@@ -111,6 +111,8 @@
     <foot-bar></foot-bar>
   </div>
 </template>
+
+
 
 <script>
   import NavBar from '../layout/Navbar.vue'
@@ -180,4 +182,10 @@
       }
     }
   };
+//   $(document).ready( function () {
+//     $('#sensor').DataTable({
+//       "pagingType": "full_numbers",
+//       "pageLength": 10
+//     });
+// } );
 </script>

@@ -13,9 +13,9 @@
         {{ error[0] }}
       </div>
 
-      <form @submit.prevent="register" method="post">
+      <form @submit.prevent="submit">
         <div class="input-group mb-3">
-          <input v-model="name" type="text" class="form-control" placeholder="Username">
+          <input v-model="form.username" type="text" class="form-control" placeholder="Username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input v-model="email" type="email" class="form-control" placeholder="Email">
+          <input v-model="form.email" type="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input v-model="password" type="password" class="form-control" placeholder="Password">
+          <input v-model="form.password" type="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -39,7 +39,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input v-model="password" type="password" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -71,9 +71,11 @@
 export default {
   data() {
     return {
-      name: "",
-      email: "",
-      password: "",
+      form:{
+        username: "",
+        email: "",
+        password: "",
+      },
       errors: null
     };
   },
