@@ -14,7 +14,7 @@
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="/#/home">Home</a></li>
-                <li class="breadcrumb-item active">Shelter</li>
+                <li class="breadcrumb-item active">Sensor</li>
               </ol>
             </div>
             <!-- /.col -->
@@ -30,11 +30,11 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h2 class="card-title">Kelola Shelter(BTS)</h2>
+                  <h2 class="card-title">Data Sensor</h2>
 
                   <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
-                      <input type="text" v-model="search" class="form-control float-right" placeholder="Cari Shelter" />
+                      <input type="text" v-model="search" class="form-control float-right" placeholder="Cari Sensor" />
 
                       <div class="input-group-append">
                         <button type="submit" class="btn btn-default">
@@ -47,11 +47,11 @@
                 <br />
                 <div class="col-12">
                   <div class="alert alert-info" role="alert">
-                    <b>Info:</b> Menampilkan list data shelter BTS dalam sistem.
+                    <b>Info:</b> Menampilkan list data sensor dalam sistem
                   </div>
                 </div>
                 <div class="col-12">
-                  <router-link to="addShelter">
+                  <router-link to="addSensor">
                     <button type="submit" class="btn btn-success float-right">
                       Add New
                     </button>
@@ -59,29 +59,43 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table table-bordered table-striped"  id="datatable">>
+                  <table class="table table-bordered table-striped">
                     <thead>
                       <tr class="text-center">
                         <th>No</th>
-                        <th>Nama Shelter (BTS)</th>
-                        <th>Regional (wilayah)</th>
-                        <th>Koordinat</th>
-                        <th>Date</th>
-                        <th>Actions</th>
+                                <th>TegAC</th>
+                                <th>ArusAC</th>
+                                <th>TegDC1</th>
+                                <th>ArusDC1</th>
+                                <th>TegDC2</th>
+                                <th>ArusDC2</th>
+                                <th>TegDC3</th>
+                                <th>ArusDC3</th>
+                                <th>TegDC4</th>
+                                <th>ArusDC4</th>
+                                <th>Date</th>
+                                <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="(item, index) in items" :key="item.id">
-                        <td>{{ index + 1 }}</td>
-                        <td>{{ item.nama_shelter }}</td>
-                        <td>{{ item.lokasi }}</td>
-                        <td>{{ item.koordinat }}</td>
-                        <td>{{ new Date(item.updatedAt).toLocaleString() }}</td>
+                      <tr v-for="(user, index) in users" :key="user.id">
+                                <td>{{ index + 1}}</td>
+                                <td>{{ user.tegangan_ac }}</td>
+                                <td>{{ user.arus_ac }}</td>
+                                <td>{{ user.tegangan_dc1 }}</td>
+                                <td>{{ user.arus_dc1 }}</td>
+                                <td>{{ user.tegangan_dc2 }}</td>
+                                <td>{{ user.arus_dc2 }}</td>
+                                <td>{{ user.tegangan_dc3 }}</td>
+                                <td>{{ user.arus_dc3 }}</td>
+                                <td>{{ user.tegangan_dc4 }}</td>
+                                <td>{{ user.arus_dc4 }}</td>
+                                <td>{{ new Date(user.updatedAt).toLocaleString()}}</td>
                         <td class="text-center">
-                          <router-link :to="{ name: 'editshelter',  params: {id: item.id}}">
+                          <router-link :to="{ name: 'editsensor',  params: {id: user.id}}">
                             <button class="btn btn-info btn-sm selected">Edit</button>
                           </router-link>
-                          <button @click="deleteData(item.id)" class="btn btn-sm btn-danger">Delete</button>
+                          <button @click="deleteData(user.id)" class="btn btn-sm btn-danger">Delete</button>
                         </td>
                       </tr>
                     </tbody>
@@ -101,11 +115,6 @@
 </template>
 
 <script>
-  import 'jquery/dist/jquery.min.js';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "datatables.net-dt/js/dataTables.dataTables"
-import "datatables.net-dt/css/jquery.dataTables.min.css"
-import $ from 'jquery'; 
   import NavBar from "../layout/Navbar.vue";
   import SideBar from "../layout/Sidebar.vue";
   import FootBar from "../layout/Footbar.vue";
@@ -121,7 +130,7 @@ import $ from 'jquery';
     },
     data() {
       return {
-        items: [],
+        users: [],
         errors: null,
         search: ''
       };
@@ -133,31 +142,17 @@ import $ from 'jquery';
     methods: {
       getUsers() {
         axios
-          .get("https://btsapii.herokuapp.com/api/shelter")
+          .get("https://btsapii.herokuapp.com/api/sensor")
           .then((res) => {
-            this.items = res.data.data;
-              $('#datatable').DataTable();
+            this.users = res.data.data;
           })
           .catch((err) => {
             console.log(err);
           })
       },
-      saveProduct() {
-        axios
-          .post("https://btsapii.herokuapp.com/api/shelter/create", this.form)
-          .then(res => {
-            console.log(res)
-            this.$router.push({
-              name: "Shelter"
-            })
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      },
       deleteData(id) {
         Swal.fire({
-          title: "Anda Yakin Ingin Menghapus Shelter Ini ?",
+          title: "Anda Yakin Ingin Menghapus Sensor Ini ?",
           text: "Klik Batal untuk Membatalkan Penghapusan",
           icon: "warning",
           showCancelButton: true,
@@ -167,21 +162,21 @@ import $ from 'jquery';
           confirmButtonText: "Hapus"
         }).then(result => {
           if (result.value) {
-            axios.delete('https://btsapii.herokuapp.com/api/shelter/delete/' + id)
+            axios.delete('https://btsapii.herokuapp.com/api/sensor/delete/' + id)
               .then(res => {
                 Swal.fire(
-                  "Terhapus", "Shelter Anda Sudah Terhapus", "success");
+                  "Terhapus", "Sensor Anda Sudah Terhapus", "success");
                 this.getUsers();
                 console.log(res);
               })
               .catch((err) => {
                 Swal.fire(
-                  "Gagal", "Shelter Anda Gagal Dihapus", "warning");
+                  "Gagal", "Sensor Anda Gagal Dihapus", "warning");
                 console.log(err)
               })
           } else {
             Swal.fire(
-              "Gagal", "Shelter Anda Gagal Dihapus", "warning");
+              "Gagal", "Sensor Anda Gagal Dihapus", "warning");
           }
         })
       }

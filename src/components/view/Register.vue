@@ -13,7 +13,7 @@
         {{ error[0] }}
       </div>
 
-      <form @submit.prevent="submit">
+      <form @submit.prevent="submit" method="post">
         <div class="input-group mb-3">
           <input v-model="form.username" type="text" class="form-control" placeholder="Username">
           <div class="input-group-append">
@@ -32,14 +32,6 @@
         </div>
         <div class="input-group mb-3">
           <input v-model="form.password" type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input v-model="password" type="password" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -68,6 +60,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
+  import axios from "axios";
 export default {
   data() {
     return {
@@ -80,23 +74,23 @@ export default {
     };
   },
   methods: {
-    register: function () {
-      let data = {
-        name: this.name,
-        email: this.email,
-        password: this.password,
-      };
-      this.$store
-        .dispatch("register", data)
-        .then(response => {
-          console.log(response)
-          this.$router.push({
-            name: 'Login'
+    submit() {
+        axios
+          .post("https://btsapii.herokuapp.com/api/auth/signup", this.form)
+          .then(res => {
+            Swal.fire(
+              "Berhasil", "Anda Berhasil Membuat Akun, Silahkan Login Terlebih Dahulu", "success");
+            console.log(res)
+            this.$router.push({
+              name: "login"
+            })
           })
-        }).catch(error => {
-          this.errors = error.response.data.errors
-        })
-    }
+          .catch(err => {
+            Swal.fire(
+              "Gagal", "Anda Gagal Membuat Akun", "warning");
+            console.log(err)
+          })
+      }
   }
 };
 </script>

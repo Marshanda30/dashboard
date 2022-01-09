@@ -36,7 +36,7 @@
               </router-link>
             </li>
             <li class="nav-item">
-              <router-link to="/sensor" class="nav-link">
+              <router-link to="/tabel" class="nav-link">
                 <i class="fas fa-database nav-icon"></i>
                 <p>Data</p>
               </router-link>

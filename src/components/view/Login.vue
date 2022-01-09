@@ -36,9 +36,8 @@
               </div>
               <!-- /.col -->
               <div class="col-4">
-                <!-- <router-link :to="{name: 'home'}"> -->
+                
                   <button type="submit" class="btn btn-primary btn-block">Login</button>
-                <!-- </router-link> -->
               </div>
               <!-- /.col -->
             </div>
@@ -53,6 +52,8 @@
   </div>
 </template>
 <script>
+  import Swal from 'sweetalert2';
+  import axios from "axios";
   export default {
     data() {
       return {
@@ -65,14 +66,20 @@
     },
     methods: {
       userLogin() {
-        this.$store.dispatch('login', this.form)
-          .then(response => {
-            console.log(response)
+        axios
+          .post("https://btsapii.herokuapp.com/api/auth/signin", this.form)
+          .then(res => {
+            Swal.fire(
+              "Berhasil", "Anda Berhasil Login", "success");
+            console.log(res)
             this.$router.push({
-              name: 'Home'
+              name: "Home"
             })
-          }).catch(error => {
-            this.errors = error.response.data.errors
+          })
+          .catch(err => {
+            Swal.fire(
+              "Gagal", "Anda Gagal Login", "warning");
+            console.log(err)
           })
       }
     }
